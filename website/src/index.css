@@ -15,42 +15,135 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* RTL logical properties support */
-  [dir="rtl"] .start-auto { left: auto; right: 0; }
-  [dir="ltr"] .start-auto { right: auto; left: 0; }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  :focus-visible {
+    outline: 2px solid #c9912d;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Button styles */
+  .btn-primary {
+    @apply px-7 py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-light transition-all duration-200 shadow-primary hover:shadow-lg hover:-translate-y-0.5;
+  }
+  .btn-gold {
+    @apply px-7 py-3 bg-gold text-white font-bold rounded-full hover:bg-gold-light transition-all duration-200 shadow-gold hover:shadow-lg hover:-translate-y-0.5;
+  }
+  .btn-outline {
+    @apply px-7 py-3 border-2 border-primary text-primary font-bold rounded-full hover:bg-primary hover:text-white transition-all duration-200;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-card border border-neutral-100 hover:shadow-card-hover transition-all duration-300;
+  }
+  .card-dark {
+    @apply bg-primary/10 rounded-2xl p-6 border border-primary/15;
+  }
+
+  /* Section titles */
+  .section-label {
+    @apply text-gold font-semibold text-sm uppercase tracking-widest mb-3;
+  }
+
+  /* Decorative divider */
+  .gold-divider {
+    @apply h-1 w-14 bg-gradient-to-r from-gold to-gold-light rounded-full;
+  }
 }
 
 @layer utilities {
   .text-gold-dark {
-    color: #c4863d;
+    color: #a87220;
   }
 
-  .bg-primary\/8 {
-    background-color: rgb(2 60 57 / 0.08);
+  .bg-primary-8 {
+    background-color: rgb(10 61 58 / 0.08);
+  }
+  .bg-primary-5 {
+    background-color: rgb(10 61 58 / 0.05);
   }
 
-  /* Smooth transitions for language switch */
-  * {
-    transition-property: none;
+  /* Gradient text */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #dba84a 0%, #c9912d 50%, #a87220 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #0e5450 0%, #0a3d3a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  a, button {
-    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Animation delay utilities */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+
+  /* Scroll reveal — add via JS intersection observer */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Section separator wave */
+  .wave-divider {
+    position: relative;
+    overflow: hidden;
+  }
+  .wave-divider::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: white;
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  /* RTL support */
+  [dir="rtl"] .start-auto { left: auto; right: 0; }
+  [dir="ltr"] .start-auto { right: auto; left: 0; }
+}
+
+/* Transitions */
+* {
+  transition-property: none;
+}
+a, button, [role="button"] {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #f7f7f4;
-}
-::-webkit-scrollbar-thumb {
-  background: #023c39;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #035550;
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f8f8f5; }
+::-webkit-scrollbar-thumb { background: #0a3d3a; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #0e5450; }
+
+/* Selection */
+::selection {
+  background-color: #c9912d;
+  color: white;
 }

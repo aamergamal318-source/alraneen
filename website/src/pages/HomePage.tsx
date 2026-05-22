@@ -1,5 +1,9 @@
 // Project Signature: alranin-community-development-association
 import { Link } from 'react-router-dom';
+import {
+  BookOpen, Cpu, Users, Handshake, GraduationCap, Trophy, Palette, Network,
+  Target, Lightbulb, ArrowLeft, ArrowRight, CheckCircle,
+} from 'lucide-react';
 import HeroSection from '../components/sections/HeroSection';
 import ValuesSection from '../components/sections/ValuesSection';
 import NewsletterSection from '../components/sections/NewsletterSection';
@@ -12,16 +16,17 @@ import NewsCard from '../components/ui/NewsCard';
 import FoundingStageBanner from '../components/ui/FoundingStageBanner';
 import PartnerLogos from '../components/ui/PartnerLogos';
 import { useLanguage } from '../context/LanguageContext';
+import { type LucideIcon } from 'lucide-react';
 
-const PROGRAM_ICONS: Record<string, string> = {
-  education: '📚',
-  tech: '💻',
-  youth: '🌟',
-  volunteer: '🤝',
-  grants: '🎓',
-  leadership: '🏆',
-  cultural: '🎨',
-  partnerships: '🤲',
+const PROGRAM_ICONS: Record<string, { Icon: LucideIcon; color: string; bg: string }> = {
+  education:    { Icon: BookOpen,      color: 'text-sky-600',     bg: 'bg-sky-50' },
+  tech:         { Icon: Cpu,           color: 'text-violet-600',  bg: 'bg-violet-50' },
+  youth:        { Icon: Users,         color: 'text-emerald-600', bg: 'bg-emerald-50' },
+  volunteer:    { Icon: Handshake,     color: 'text-rose-600',    bg: 'bg-rose-50' },
+  grants:       { Icon: GraduationCap, color: 'text-amber-600',   bg: 'bg-amber-50' },
+  leadership:   { Icon: Trophy,        color: 'text-orange-600',  bg: 'bg-orange-50' },
+  cultural:     { Icon: Palette,       color: 'text-pink-600',    bg: 'bg-pink-50' },
+  partnerships: { Icon: Network,       color: 'text-teal-600',    bg: 'bg-teal-50' },
 };
 
 const GRADIENTS = [
@@ -33,36 +38,29 @@ const GRADIENTS = [
 ];
 
 const NEWS_GRADIENTS = [
-  'from-primary to-primary/80',
+  'from-primary to-primary-light',
   'from-teal-700 to-teal-900',
   'from-emerald-700 to-emerald-900',
-  'from-gold/80 to-gold-dark',
+  'from-gold-dark to-gold',
   'from-cyan-700 to-cyan-900',
 ];
 
 export default function HomePage() {
   const { t, isRTL } = useLanguage();
+  const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   const programEntries = Object.entries(t.programs.items).slice(0, 4);
   const initiativeEntries = Object.entries(t.initiatives.items).slice(0, 3);
   const newsEntries = Object.entries(t.news.items).slice(0, 3);
 
   const statusMap: Record<string, 'planning' | 'soon' | 'open' | 'seeking'> = {
-    scholarships: 'seeking',
-    leaders: 'planning',
-    techlab: 'open',
-    volunteerDays: 'soon',
-    schoolSupport: 'planning',
-    aiWorkshops: 'open',
-    cultural: 'soon',
+    scholarships: 'seeking', leaders: 'planning', techlab: 'open',
+    volunteerDays: 'soon', schoolSupport: 'planning', aiWorkshops: 'open', cultural: 'soon',
   };
 
   const newsDates: Record<string, string> = {
-    launch: '2026-01-15',
-    volunteers: '2026-02-01',
-    education: '2026-02-20',
-    digital: '2026-03-10',
-    partnership: '2026-04-05',
+    launch: '2026-01-15', volunteers: '2026-02-01', education: '2026-02-20',
+    digital: '2026-03-10', partnership: '2026-04-05',
   };
 
   return (
@@ -70,50 +68,76 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Founding Stage Banner */}
-      <section className="py-10 bg-neutral-50">
+      <section className="py-8 bg-neutral-50 border-b border-neutral-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <FoundingStageBanner />
         </div>
       </section>
 
-      {/* About Intro */}
-      <section className="py-20 bg-white">
+      {/* About Intro — Bento Grid */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
-            <div className={isRTL ? 'text-right' : 'text-left'}>
-              <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{t.common.foundingStage}</p>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-5 leading-tight">
+          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-14 items-center`}>
+
+            {/* Text side */}
+            <div className={isRTL ? 'text-right order-1' : 'text-left order-1'}>
+              <p className="section-label">{t.common.foundingStage}</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-4 leading-tight">
                 {t.about.title}
               </h2>
-              <div className="h-1 w-16 bg-gold rounded-full mb-6" />
-              <p className="text-neutral-700 text-lg leading-relaxed mb-8">
+              <div className="gold-divider mb-6" />
+              <p className="text-neutral-600 text-lg leading-loose mb-8">
                 {t.about.intro}
               </p>
+              {/* Mission & Vision mini cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className={`bg-primary/5 border border-primary/10 rounded-2xl p-5 ${isRTL ? 'text-right' : 'text-left'}`}>
+                  <div className="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center mb-3">
+                    <Target size={18} className="text-primary" />
+                  </div>
+                  <p className="font-bold text-primary text-sm mb-1">{t.about.missionTitle}</p>
+                  <p className="text-neutral-500 text-xs leading-relaxed line-clamp-3">{t.about.missionDesc}</p>
+                </div>
+                <div className={`bg-gold/8 border border-gold/15 rounded-2xl p-5 ${isRTL ? 'text-right' : 'text-left'}`}>
+                  <div className="w-9 h-9 bg-gold/15 rounded-xl flex items-center justify-center mb-3">
+                    <Lightbulb size={18} className="text-gold-dark" />
+                  </div>
+                  <p className="font-bold text-primary text-sm mb-1">{t.about.visionTitle}</p>
+                  <p className="text-neutral-500 text-xs leading-relaxed line-clamp-3">{t.about.visionDesc}</p>
+                </div>
+              </div>
               <Link
                 to="/about"
-                className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-light transition-colors duration-200 shadow-md"
+                className={`inline-flex items-center gap-2 btn-primary`}
               >
                 {t.common.learnMore}
+                <Arrow size={16} />
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-primary rounded-2xl p-6 text-white aspect-square flex flex-col justify-end">
-                <div className="text-4xl mb-3">🌱</div>
-                <p className="font-bold text-lg">{t.about.missionTitle}</p>
-                <p className="text-white/70 text-sm mt-1">{t.about.missionDesc.slice(0, 60)}...</p>
+
+            {/* Visual grid side */}
+            <div className="grid grid-cols-2 gap-4 order-2">
+              <div className="bg-primary rounded-2xl p-6 text-white flex flex-col justify-between min-h-[160px] shadow-primary">
+                <CheckCircle size={28} className="text-gold mb-4" />
+                <div>
+                  <p className="font-bold text-base">{t.about.values.responsibility}</p>
+                  <p className="text-white/55 text-xs mt-1">{t.about.valueDescs.responsibility.slice(0, 55)}...</p>
+                </div>
               </div>
-              <div className="bg-gold rounded-2xl p-6 text-primary aspect-square flex flex-col justify-end mt-6">
-                <div className="text-4xl mb-3">🌟</div>
-                <p className="font-bold text-lg">{t.about.visionTitle}</p>
-                <p className="text-primary/80 text-sm mt-1">{t.about.visionDesc.slice(0, 60)}...</p>
+              <div className="bg-gold rounded-2xl p-6 flex flex-col justify-between min-h-[160px] shadow-gold mt-8">
+                <GraduationCap size={28} className="text-white mb-4" />
+                <div>
+                  <p className="font-bold text-white text-base">{t.about.values.empowerment}</p>
+                  <p className="text-white/65 text-xs mt-1">{t.about.valueDescs.empowerment.slice(0, 55)}...</p>
+                </div>
               </div>
-              <div className="bg-neutral-100 rounded-2xl p-6 aspect-square flex flex-col justify-end -mt-4">
-                <div className="text-4xl mb-3">🤝</div>
-                <p className="font-bold text-primary text-lg">{t.about.values.partnership}</p>
+              <div className="bg-neutral-50 border border-neutral-100 rounded-2xl p-6 flex flex-col justify-between min-h-[140px] -mt-5">
+                <Handshake size={26} className="text-teal mb-3" />
+                <p className="font-bold text-primary text-base">{t.about.values.partnership}</p>
               </div>
-              <div className="bg-primary/10 rounded-2xl p-6 aspect-square flex flex-col justify-end">
-                <div className="text-4xl mb-3">💡</div>
-                <p className="font-bold text-primary text-lg">{t.about.values.innovation}</p>
+              <div className="bg-primary/8 rounded-2xl p-6 flex flex-col justify-between min-h-[140px]">
+                <Lightbulb size={26} className="text-gold-dark mb-3" />
+                <p className="font-bold text-primary text-base">{t.about.values.innovation}</p>
               </div>
             </div>
           </div>
@@ -121,26 +145,29 @@ export default function HomePage() {
       </section>
 
       {/* Programs Preview */}
-      <section className="py-20 bg-neutral-50">
+      <section className="py-24 bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title={t.programs.title} subtitle={t.programs.subtitle} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            {programEntries.map(([key, prog]) => (
-              <ProgramCard
-                key={key}
-                icon={PROGRAM_ICONS[key] || '⭐'}
-                title={prog.title}
-                desc={prog.desc}
-                slug={key}
-              />
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            {programEntries.map(([key, prog]) => {
+              const meta = PROGRAM_ICONS[key] || { Icon: BookOpen, color: 'text-primary', bg: 'bg-primary-5' };
+              return (
+                <ProgramCard
+                  key={key}
+                  Icon={meta.Icon}
+                  iconColor={meta.color}
+                  iconBg={meta.bg}
+                  title={prog.title}
+                  desc={prog.desc}
+                  slug={key}
+                />
+              );
+            })}
           </div>
           <div className="text-center">
-            <Link
-              to="/fields"
-              className="inline-flex items-center px-8 py-3 border-2 border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-colors duration-200"
-            >
+            <Link to="/fields" className="inline-flex items-center gap-2 btn-outline">
               {t.common.learnMore}
+              <Arrow size={16} />
             </Link>
           </div>
         </div>
@@ -149,7 +176,7 @@ export default function HomePage() {
       <VisionStats />
 
       {/* Initiatives Preview */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title={t.initiatives.title} subtitle={t.initiatives.subtitle} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -167,11 +194,9 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center">
-            <Link
-              to="/initiatives"
-              className="inline-flex items-center px-8 py-3 border-2 border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-colors duration-200"
-            >
+            <Link to="/initiatives" className="inline-flex items-center gap-2 btn-outline">
               {t.common.learnMore}
+              <Arrow size={16} />
             </Link>
           </div>
         </div>
@@ -180,7 +205,7 @@ export default function HomePage() {
       <CTASection />
 
       {/* News Preview */}
-      <section className="py-20 bg-neutral-50">
+      <section className="py-24 bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title={t.news.title} subtitle={t.news.subtitle} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -197,18 +222,16 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center">
-            <Link
-              to="/news"
-              className="inline-flex items-center px-8 py-3 border-2 border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-colors duration-200"
-            >
+            <Link to="/news" className="inline-flex items-center gap-2 btn-outline">
               {t.common.readMore}
+              <Arrow size={16} />
             </Link>
           </div>
         </div>
       </section>
 
       <PartnerLogos />
-
+      <ValuesSection />
       <NewsletterSection />
     </div>
   );
