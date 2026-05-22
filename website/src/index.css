@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Google Font ────────────────────────────────────────────────────── */
+/* Loaded via <link> in index.html */
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -16,134 +19,128 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
     line-height: 1.3;
+    font-weight: 700;
   }
 
+  /* Accessible focus ring */
   :focus-visible {
-    outline: 2px solid #c9912d;
-    outline-offset: 2px;
+    outline: 2px solid #c8912c;
+    outline-offset: 3px;
     border-radius: 4px;
   }
 }
 
+/* ─── Reusable Component Classes ──────────────────────────────────────── */
 @layer components {
-  /* Button styles */
+
+  /* Buttons */
   .btn-primary {
-    @apply px-7 py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-light transition-all duration-200 shadow-primary hover:shadow-lg hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2
+           px-7 py-3 bg-primary text-white font-bold rounded-full
+           hover:bg-primary-light transition-all duration-200
+           shadow-navy hover:shadow-lg hover:-translate-y-0.5
+           focus-visible:ring-2 focus-visible:ring-primary/50;
   }
-  .btn-gold {
-    @apply px-7 py-3 bg-gold text-white font-bold rounded-full hover:bg-gold-light transition-all duration-200 shadow-gold hover:shadow-lg hover:-translate-y-0.5;
+  .btn-amber {
+    @apply inline-flex items-center justify-center gap-2
+           px-7 py-3 bg-gold text-white font-bold rounded-full
+           hover:bg-gold-light transition-all duration-200
+           shadow-amber hover:shadow-lg hover:-translate-y-0.5;
+  }
+  .btn-teal {
+    @apply inline-flex items-center justify-center gap-2
+           px-7 py-3 bg-teal text-white font-bold rounded-full
+           hover:bg-teal-light transition-all duration-200
+           shadow-teal hover:shadow-lg hover:-translate-y-0.5;
   }
   .btn-outline {
-    @apply px-7 py-3 border-2 border-primary text-primary font-bold rounded-full hover:bg-primary hover:text-white transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2
+           px-7 py-3 border-2 border-primary text-primary font-bold rounded-full
+           hover:bg-primary hover:text-white transition-all duration-200;
   }
+  /* keep alias for legacy usage */
+  .btn-gold { @apply btn-amber; }
 
-  /* Card styles */
+  /* Cards */
   .card {
-    @apply bg-white rounded-2xl p-6 shadow-card border border-neutral-100 hover:shadow-card-hover transition-all duration-300;
-  }
-  .card-dark {
-    @apply bg-primary/10 rounded-2xl p-6 border border-primary/15;
+    @apply bg-white rounded-2xl p-6 shadow-card border border-neutral-100
+           hover:shadow-card-hover transition-all duration-300;
   }
 
-  /* Section titles */
+  /* Section label (small tag above headings) */
   .section-label {
-    @apply text-gold font-semibold text-sm uppercase tracking-widest mb-3;
+    @apply inline-block text-teal font-bold text-xs uppercase tracking-widest mb-3;
   }
 
-  /* Decorative divider */
+  /* Gold/amber divider line below headings */
   .gold-divider {
-    @apply h-1 w-14 bg-gradient-to-r from-gold to-gold-light rounded-full;
+    @apply h-[3px] w-12 rounded-full
+           bg-gradient-to-r from-gold to-gold-light;
   }
 }
 
+/* ─── Utilities ──────────────────────────────────────────────────────── */
 @layer utilities {
-  .text-gold-dark {
-    color: #a87220;
-  }
 
-  .bg-primary-8 {
-    background-color: rgb(10 61 58 / 0.08);
-  }
-  .bg-primary-5 {
-    background-color: rgb(10 61 58 / 0.05);
-  }
+  /* Legacy utility — kept for backward compatibility */
+  .text-gold-dark { color: #b45309; }
+  .bg-primary-8   { background-color: rgb(30 58 110 / 0.08); }
+  .bg-primary-5   { background-color: rgb(30 58 110 / 0.05); }
 
-  /* Gradient text */
+  /* Gradient text helpers */
   .text-gradient-gold {
-    background: linear-gradient(135deg, #dba84a 0%, #c9912d 50%, #a87220 100%);
+    background: linear-gradient(135deg, #dea943 0%, #c8912c 50%, #9c6a18 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .text-gradient-primary {
-    background: linear-gradient(135deg, #0e5450 0%, #0a3d3a 100%);
+  .text-gradient-navy {
+    background: linear-gradient(135deg, #08727c 0%, #00535c 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Animation delay utilities */
+  /* Animation delays */
   .delay-100 { animation-delay: 100ms; }
   .delay-200 { animation-delay: 200ms; }
   .delay-300 { animation-delay: 300ms; }
   .delay-400 { animation-delay: 400ms; }
   .delay-500 { animation-delay: 500ms; }
   .delay-600 { animation-delay: 600ms; }
-  .delay-700 { animation-delay: 700ms; }
 
-  /* Scroll reveal — add via JS intersection observer */
+  /* Scroll reveal */
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
   }
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Section separator wave */
-  .wave-divider {
-    position: relative;
-    overflow: hidden;
-  }
-  .wave-divider::after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 48px;
-    background: white;
-    clip-path: ellipse(55% 100% at 50% 100%);
-  }
-
-  /* RTL support */
+  /* RTL helpers */
   [dir="rtl"] .start-auto { left: auto; right: 0; }
   [dir="ltr"] .start-auto { right: auto; left: 0; }
 }
 
-/* Transitions */
-* {
-  transition-property: none;
-}
-a, button, [role="button"] {
-  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+/* ─── Global Transitions ─────────────────────────────────────────────── */
+/* Opt-in only — avoids layout jank */
+* { transition-property: none; }
+a, button, [role="button"], input, select, textarea {
+  transition-property: color, background-color, border-color,
+                        box-shadow, transform, opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #f8f8f5; }
-::-webkit-scrollbar-thumb { background: #0a3d3a; border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: #0e5450; }
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: #f1f5f9; }
+::-webkit-scrollbar-thumb  { background: #00535c; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #08727c; }
 
-/* Selection */
-::selection {
-  background-color: #c9912d;
-  color: white;
-}
+/* ─── Selection ──────────────────────────────────────────────────────── */
+::selection { background-color: #00535c; color: white; }
