@@ -17,8 +17,14 @@ function RaninLogo() {
 }
 
 export default function Footer() {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, lang } = useLanguage();
   const currentYear = new Date().getFullYear();
+  const assocName = lang === 'en' ? 'Al Ranin' : lang === 'he' ? 'עמותת אלרנין' : 'جمعية الرنين';
+  const assocFull = lang === 'en'
+    ? 'Al Ranin Association for Community Development'
+    : lang === 'he'
+    ? 'עמותת אלרנין לפיתוח קהילתי'
+    : 'جمعية الرنين للتطوير المجتمعي';
 
   const navLinks = [
     { label: t.nav.home, path: '/' },
@@ -49,7 +55,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-5">
               <RaninLogo />
               <div>
-                <p className="text-white font-extrabold text-base leading-tight">Al Ranin</p>
+                <p className="text-white font-extrabold text-base leading-tight">{assocName}</p>
                 <p className="text-gold text-xs leading-tight mt-0.5">{t.footer.founding}</p>
               </div>
             </div>
@@ -113,7 +119,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/42 text-xs text-center">
-            © {currentYear} Al Ranin. {t.footer.rights}.
+            © {currentYear} {assocFull}. {t.footer.rights}.
           </p>
           <div className="flex items-center gap-5">
             <span className="text-white/30 text-xs">{t.footer.founding}</span>
