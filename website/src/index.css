@@ -124,6 +124,33 @@
   /* RTL helpers */
   [dir="rtl"] .start-auto { left: auto; right: 0; }
   [dir="ltr"] .start-auto { right: auto; left: 0; }
+
+  .not-found-ring {
+    position: absolute;
+    inset: 12%;
+    border: 2px solid rgb(200 145 44 / 0.22);
+    border-radius: 9999px;
+    animation: notFoundRipple 3.8s ease-out infinite;
+  }
+  .not-found-ring-two {
+    animation-delay: 1.1s;
+    border-color: rgb(255 255 255 / 0.16);
+  }
+  .not-found-ring-three {
+    animation-delay: 2.2s;
+    border-color: rgb(200 145 44 / 0.16);
+  }
+}
+
+@keyframes notFoundRipple {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.82);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
 }
 
 /* ─── Global Transitions ─────────────────────────────────────────────── */

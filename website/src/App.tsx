@@ -15,6 +15,7 @@ import NewsDetailPage from './pages/NewsDetailPage';
 import PartnersPage from './pages/PartnersPage';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function AppRoutes() {
   return (
@@ -37,18 +38,7 @@ function AppRoutes() {
       <Route path="/partners" element={<Layout><PartnersPage /></Layout>} />
       <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
 
-      {/* 404 */}
-      <Route path="*" element={
-        <Layout>
-          <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-            <div className="text-center">
-              <div className="text-8xl font-extrabold text-primary/10 mb-6">404</div>
-              <h1 className="text-2xl font-bold text-primary mb-4">Page Not Found</h1>
-              <a href="/" className="text-gold font-semibold hover:underline">Return Home</a>
-            </div>
-          </div>
-        </Layout>
-      } />
+      <Route path="*" element={<Layout><NotFoundPage /></Layout>} />
     </Routes>
     </>
   );
