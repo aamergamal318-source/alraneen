@@ -1,0 +1,56 @@
+/* Project Signature: alranin-community-development-association */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Cairo', 'Segoe UI', Arial, sans-serif;
+  }
+
+  body {
+    @apply bg-white text-neutral-900 antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* RTL logical properties support */
+  [dir="rtl"] .start-auto { left: auto; right: 0; }
+  [dir="ltr"] .start-auto { right: auto; left: 0; }
+}
+
+@layer utilities {
+  .text-gold-dark {
+    color: #c4863d;
+  }
+
+  .bg-primary\/8 {
+    background-color: rgb(2 60 57 / 0.08);
+  }
+
+  /* Smooth transitions for language switch */
+  * {
+    transition-property: none;
+  }
+
+  a, button {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f7f7f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #023c39;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #035550;
+}
