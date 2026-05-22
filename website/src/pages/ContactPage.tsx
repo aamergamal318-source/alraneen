@@ -8,10 +8,10 @@ export default function ContactPage() {
   const { t, isRTL } = useLanguage();
 
   const socialLinks = [
-    { Icon: Facebook,  label: 'Facebook',  href: '#' },
-    { Icon: Instagram, label: 'Instagram', href: '#' },
-    { Icon: Twitter,   label: 'Twitter',   href: '#' },
-    { Icon: Linkedin,  label: 'LinkedIn',  href: '#' },
+    { Icon: Facebook,  label: 'Facebook' },
+    { Icon: Instagram, label: 'Instagram' },
+    { Icon: Twitter,   label: 'X' },
+    { Icon: Linkedin,  label: 'LinkedIn' },
   ];
 
   return (
@@ -74,15 +74,15 @@ export default function ContactPage() {
               <div className={`bg-white rounded-2xl p-7 shadow-card border border-neutral-100 ${isRTL ? 'text-right' : 'text-left'}`}>
                 <h3 className="text-sm font-bold text-primary mb-4">{t.contact.info.social}</h3>
                 <div className="flex gap-2.5">
-                  {socialLinks.map(({ Icon, label, href }) => (
-                    <a
+                  {socialLinks.map(({ Icon, label }) => (
+                    <span
                       key={label}
-                      href={href}
                       aria-label={label}
-                      className="w-10 h-10 bg-primary/8 rounded-xl flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-200 hover:-translate-y-0.5"
+                      title={label}
+                      className="w-10 h-10 bg-primary/8 rounded-xl flex items-center justify-center text-primary"
                     >
                       <Icon size={17} />
-                    </a>
+                    </span>
                   ))}
                 </div>
               </div>

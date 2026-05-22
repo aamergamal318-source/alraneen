@@ -62,14 +62,14 @@ export default function Footer() {
             <p className="text-white/62 text-sm leading-relaxed mb-6">{t.footer.desc}</p>
             <div className="flex gap-2.5">
               {socials.map(({ Icon, label }) => (
-                <a
+                <span
                   key={label}
-                  href="#"
                   aria-label={label}
-                  className="w-9 h-9 bg-white/8 rounded-full flex items-center justify-center hover:bg-gold hover:text-primary transition-all duration-200 hover:-translate-y-0.5"
+                  title={label}
+                  className="w-9 h-9 bg-white/8 rounded-full flex items-center justify-center text-white/70"
                 >
                   <Icon size={15} />
-                </a>
+                </span>
               ))}
             </div>
           </div>
