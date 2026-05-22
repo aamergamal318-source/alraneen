@@ -1,5 +1,5 @@
 // Project Signature: alranin-community-development-association
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import Layout from './components/layout/Layout';
 import ScrollToTop from './components/layout/ScrollToTop';
@@ -57,9 +57,9 @@ function AppRoutes() {
 export default function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <HashRouter>
         <AppRoutes />
-      </BrowserRouter>
+      </HashRouter>
     </LanguageProvider>
   );
 }

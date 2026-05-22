@@ -5,7 +5,11 @@ const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1]
 
 export default defineConfig({
   root: './website',
-  base: repositoryName ? `/${repositoryName}/` : '/',
+  base: repositoryName ? `/${repositoryName}/` : './',
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+  },
   plugins: [react()],
   resolve: {
     alias: {
