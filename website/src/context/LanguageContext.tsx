@@ -28,6 +28,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.body.dir = isRTL ? 'rtl' : 'ltr';
     document.title = lang === 'ar'
       ? 'جمعية الرنين للتطوير المجتمعي'
       : lang === 'he'

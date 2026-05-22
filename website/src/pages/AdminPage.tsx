@@ -11,7 +11,7 @@ interface StatCard {
 }
 
 export default function AdminPage() {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, lang } = useLanguage();
   const [activeTab, setActiveTab] = useState<'initiatives' | 'news'>('initiatives');
 
   const stats: StatCard[] = [
@@ -40,7 +40,7 @@ export default function AdminPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-neutral-50" dir={isRTL ? 'rtl' : 'ltr'} lang={lang}>
       {/* Header */}
       <div className="bg-primary text-white py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
